@@ -3,14 +3,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+   background-color: white;
     color: #333;
 }
 
 .header {
     text-align: center;
     padding: 20px;
-    background-color: #7de91e;
+    background-color: white;
     color: white;
 }
 
@@ -36,14 +36,14 @@ body {
     display: none; /* Inicialmente oculto */
     overflow: hidden;
     padding: 10px;
-    background-color: #f5f5f5;
+     
     border-radius: 5px;
 }
 
 .menu-item {
     display: flex;
     margin-bottom: 15px;
-    background-color: #fff;
+    background-color: #6de503;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -58,10 +58,10 @@ body {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    background-color: #6de503;
+    background-image:url(./imagenes/fondoVerde.png);
 }
 
-.menu-info {
+.menu-info {    
     padding: 10px;
     flex-grow: 1;
 }
@@ -70,3 +70,7 @@ body {
     color: #6de503;
     font-weight: bold;
 }
+
+.logo{width: 16rem;
+    height: auto;
+margin-bottom: -60px;}
