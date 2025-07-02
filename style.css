@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
    background-color: white;
-    color: #333;
+    color: #000000;
 }
 
 .header {
@@ -67,7 +67,7 @@ body {
 }
 
 .price {
-    color: #6de503;
+    color: #000000;
     font-weight: bold;
 }
 
