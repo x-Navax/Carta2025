@@ -28,15 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error al cargar los datos:', error));
 
     function createMenuItem(item) {
-        const sanitizedImageName = item.nombre.toLowerCase().replace(/ /g, '_') + '.jpg';
-        const imagePath = `${imageBasePath}${sanitizedImageName}`;
+        const baseName = item.nombre.toLowerCase().replace(/ /g, '_');
+        const extensions = ['jpg', 'jpeg', 'png', 'webp']; // extensiones posibles
 
-        // Solo muestro la etiqueta <img> si carga bien, sino se oculta con onerror
-        const imageTag = `<img class="menu-image" src="${imagePath}" alt="${item.nombre}" onerror="this.style.display='none'">`;
+        // genera varias etiquetas <img>, la primera que cargue se queda
+        const imageTags = extensions.map(ext => 
+            `<img class="menu-image" src="${imageBasePath}${baseName}.${ext}" alt="${item.nombre}" 
+            onerror="this.style.display='none'">`
+        ).join('');
 
         return `
             <div class="menu-item">
-                ${imageTag}
+                ${imageTags}
                 <div class="menu-info">
                     <h3>${item.nombre}</h3>
                     <p>${item.descripcion}</p>
