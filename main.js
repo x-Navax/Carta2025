@@ -30,9 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function createMenuItem(item) {
         const sanitizedImageName = item.nombre.toLowerCase().replace(/ /g, '_') + '.jpg';
         const imagePath = `${imageBasePath}${sanitizedImageName}`;
+
+        // Solo muestro la etiqueta <img> si carga bien, sino se oculta con onerror
+        const imageTag = `<img class="menu-image" src="${imagePath}" alt="${item.nombre}" onerror="this.style.display='none'">`;
+
         return `
             <div class="menu-item">
-                <img class="menu-image" src="${imagePath}" alt="${item.nombre}">
+                ${imageTag}
                 <div class="menu-info">
                     <h3>${item.nombre}</h3>
                     <p>${item.descripcion}</p>
