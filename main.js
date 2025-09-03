@@ -24,6 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+
+            // Evento global para imágenes
+            document.body.addEventListener('click', e => {
+                if (e.target.classList.contains('menu-image')) {
+                    openImageModal(e.target.src, e.target.alt);
+                }
+            });
         })
         .catch(error => console.error('Error al cargar los datos:', error));
 
@@ -31,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const baseName = item.nombre.toLowerCase().replace(/ /g, '_');
         const extensions = ['jpg', 'jpeg', 'png', 'webp']; // extensiones posibles
 
-        // genera varias etiquetas <img>, la primera que cargue se queda
         const imageTags = extensions.map(ext => 
             `<img class="menu-image" src="${imageBasePath}${baseName}.${ext}" alt="${item.nombre}" 
             onerror="this.style.display='none'">`
@@ -60,5 +66,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 return obj;
             }, {});
         });
+    }
+
+    // ==== MODAL PARA EXPANDIR IMAGEN ====
+    function openImageModal(src, alt) {
+        let modal = document.getElementById('image-modal');
+
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'image-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '1000';
+
+            modal.innerHTML = `
+                <span id="modal-close" style="
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    font-size: 40px;
+                    font-weight: bold;
+                    color: white;
+                    cursor: pointer;
+                    user-select: none;
+                ">&times;</span>
+                <img id="modal-img" style="max-width:90%; max-height:90%; border-radius:10px;">
+            `;
+
+            // cerrar al hacer click en la X
+            modal.querySelector('#modal-close').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // cerrar si se hace click en el fondo oscuro
+            modal.addEventListener('click', e => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            document.body.appendChild(modal);
+        }
+
+        const modalImg = document.getElementById('modal-img');
+        modalImg.src = src;
+        modalImg.alt = alt;
+
+        modal.style.display = 'flex';
     }
 });
